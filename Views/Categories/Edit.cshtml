@@ -1,0 +1,25 @@
+﻿@model Category
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<form method="post" asp-controller="Categories" asp-action="Edit">
+
+   
+    <div class="row pb-2">
+        <h2 class="text-primary">Edit Category</h2>
+    </div>
+    <div class="mb-3">
+        <input asp-for="Name" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="DisplayOrder"></label>
+        <input asp-for="DisplayOrder" />
+        <span asp-validation-for="DisplayOrder"></span>
+    </div>
+    <button class="btn btn-primary" type="submit"><i class="bi bi-pencil"></i> Edit</button>
+    <a asp-controller="Categories" asp-action="Index" class="btn btn-secondary">
+        <i class="bi bi-skip-backward-circle-fill"></i> Back To List
+    </a>
+</form>
