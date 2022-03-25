@@ -1,4 +1,5 @@
 ﻿using BulkyBook.DataAccess;
+using BulkyBook.DataAccess.Repositories.IRepositories;
 using BulkyBook.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -7,24 +8,24 @@ namespace BulkyBookWeb.Controllers
 {
     public class CategoriesController : Controller
     {
-        private BulkyDbContext _dbContext;
-        public CategoriesController(BulkyDbContext dbContext)
+        private ICategoryRepository _categoryRepository;
+        public CategoriesController(ICategoryRepository categoryRepository)
         {
-            _dbContext = dbContext;
+            _categoryRepository = categoryRepository;
         }
         public async Task<IActionResult> Index()
         {
-            IList<Category> categories = await RetrieveAllCategoriesAsync();
+            IEnumerable<Category> categories = await RetrieveAllCategoriesAsync();
 
             return View(categories);
         }
 
-        private async Task<IList<Category>> RetrieveAllCategoriesAsync()
+        private async Task<IEnumerable<Category>> RetrieveAllCategoriesAsync()
         {
-            IList<Category> categoriesList;
+            IEnumerable<Category> categoriesList;
             try
             {
-                categoriesList = await _dbContext.Categories.ToListAsync();
+                categoriesList = await _categoryRepository.GetAll();
             }
             catch (Exception ex)
             {
@@ -65,8 +66,8 @@ namespace BulkyBookWeb.Controllers
                 }
                 if (ModelState.IsValid)
                 {
-                    await _dbContext.Categories.AddAsync(category);
-                    await _dbContext.SaveChangesAsync();
+                    await _categoryRepository.Add(category);
+                    await _categoryRepository.SaveChanges();
 
                     TempData["success"] = $"Category {category.Name} created successfully";
 
@@ -93,9 +94,10 @@ namespace BulkyBookWeb.Controllers
 
             try
             {
-                /*var category = await _dbContext.Categories
+                /*var category = await _categoryRepository.Categories
                     .FirstOrDefaultAsync(category => category.Id == id);*/
-                var category = await _dbContext.FindAsync<Category>(id);
+                var category = await _categoryRepository.
+                    GetFirstOrDefault(category => category.Id == id); 
                 if(category == null)
                 {
                     return NotFound();
@@ -121,7 +123,8 @@ namespace BulkyBookWeb.Controllers
 
             try
             {
-                var dbCategory = await _dbContext.FindAsync<Category>(id);
+                var dbCategory = await _categoryRepository.
+                    GetFirstOrDefault(category => category.Id == id);
                 if(dbCategory == null)
                 {
                     return NotFound();
@@ -130,7 +133,7 @@ namespace BulkyBookWeb.Controllers
                 dbCategory.Name = category.Name;
                 dbCategory.DisplayOrder = category.DisplayOrder;    
 
-                await _dbContext.SaveChangesAsync();
+                await _categoryRepository.SaveChanges();
                 TempData["success"] = $"Category {dbCategory.Name} updated successfully";
 
                 return RedirectToAction("Index");
@@ -155,9 +158,11 @@ namespace BulkyBookWeb.Controllers
 
             try
             {
-                /*var category = await _dbContext.Categories
+                /*var category = await _categoryRepository.Categories
                     .FirstOrDefaultAsync(category => category.Id == id);*/
-                var category = await _dbContext.FindAsync<Category>(id);
+                var category = await _categoryRepository
+                    .GetFirstOrDefault(category => category.Id == id); 
+
                 if (category == null)
                 {
                     return NotFound();
@@ -183,11 +188,11 @@ namespace BulkyBookWeb.Controllers
                 {
                     return NotFound();
                 }
-                var dbCategory = await _dbContext.FindAsync<Category>(id);
+                var dbCategory = await _categoryRepository.GetAsync(id);
                 if(dbCategory != null)
                 {
-                    _dbContext.Remove(dbCategory);
-                    await _dbContext.SaveChangesAsync();
+                    _categoryRepository.Delete(category);
+                    await _categoryRepository.SaveChanges();
                 }
                 TempData["success"] = $"Category {category.Name} deleted successfully";
 
