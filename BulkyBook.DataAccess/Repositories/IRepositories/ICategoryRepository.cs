@@ -1,4 +1,5 @@
 ﻿using BulkyBook.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,6 @@ namespace BulkyBook.DataAccess.Repositories.IRepositories
 {
     public interface ICategoryRepository : IRepository<Category>
     {
-        void Update(Category category);
-        Task<int> SaveChanges();
+        EntityState Update(Category category);
     }
 }

@@ -3,15 +3,16 @@ using BulkyBook.DataAccess.Repositories.IRepositories;
 using BulkyBook.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using BulkyBook.DataAccess.Repositories;
 
 namespace BulkyBookWeb.Controllers
 {
     public class CategoriesController : Controller
     {
-        private ICategoryRepository _categoryRepository;
-        public CategoriesController(ICategoryRepository categoryRepository)
+        private IUnitOfWork _unitOfWork;
+        public CategoriesController(IUnitOfWork unitOfWork)
         {
-            _categoryRepository = categoryRepository;
+            _unitOfWork = unitOfWork;
         }
         public async Task<IActionResult> Index()
         {
@@ -25,7 +26,7 @@ namespace BulkyBookWeb.Controllers
             IEnumerable<Category> categoriesList;
             try
             {
-                categoriesList = await _categoryRepository.GetAll();
+                categoriesList = await _unitOfWork.CategoryRepository.GetAll();
             }
             catch (Exception ex)
             {
@@ -66,8 +67,8 @@ namespace BulkyBookWeb.Controllers
                 }
                 if (ModelState.IsValid)
                 {
-                    await _categoryRepository.Add(category);
-                    await _categoryRepository.SaveChanges();
+                    await _unitOfWork.CategoryRepository.Add(category);
+                    await _unitOfWork.Save();
 
                     TempData["success"] = $"Category {category.Name} created successfully";
 
@@ -96,7 +97,7 @@ namespace BulkyBookWeb.Controllers
             {
                 /*var category = await _categoryRepository.Categories
                     .FirstOrDefaultAsync(category => category.Id == id);*/
-                var category = await _categoryRepository.
+                var category = await _unitOfWork.CategoryRepository.
                     GetFirstOrDefault(category => category.Id == id); 
                 if(category == null)
                 {
@@ -123,7 +124,7 @@ namespace BulkyBookWeb.Controllers
 
             try
             {
-                var dbCategory = await _categoryRepository.
+                var dbCategory = await _unitOfWork.CategoryRepository.
                     GetFirstOrDefault(category => category.Id == id);
                 if(dbCategory == null)
                 {
@@ -133,7 +134,8 @@ namespace BulkyBookWeb.Controllers
                 dbCategory.Name = category.Name;
                 dbCategory.DisplayOrder = category.DisplayOrder;    
 
-                await _categoryRepository.SaveChanges();
+                _unitOfWork.CategoryRepository.Update(dbCategory);
+                await _unitOfWork.Save();
                 TempData["success"] = $"Category {dbCategory.Name} updated successfully";
 
                 return RedirectToAction("Index");
@@ -160,7 +162,7 @@ namespace BulkyBookWeb.Controllers
             {
                 /*var category = await _categoryRepository.Categories
                     .FirstOrDefaultAsync(category => category.Id == id);*/
-                var category = await _categoryRepository
+                var category = await _unitOfWork.CategoryRepository
                     .GetFirstOrDefault(category => category.Id == id); 
 
                 if (category == null)
@@ -188,11 +190,11 @@ namespace BulkyBookWeb.Controllers
                 {
                     return NotFound();
                 }
-                var dbCategory = await _categoryRepository.GetAsync(id);
+                var dbCategory = await _unitOfWork.CategoryRepository.GetAsync(id);
                 if(dbCategory != null)
                 {
-                    _categoryRepository.Delete(category);
-                    await _categoryRepository.SaveChanges();
+                    _unitOfWork.CategoryRepository.Delete(dbCategory);
+                    await _unitOfWork.Save();
                 }
                 TempData["success"] = $"Category {category.Name} deleted successfully";
 

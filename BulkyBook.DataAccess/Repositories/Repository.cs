@@ -1,5 +1,7 @@
 ﻿using BulkyBook.DataAccess.Repositories.IRepositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,22 +13,22 @@ namespace BulkyBook.DataAccess.Repositories
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        private readonly BulkyDbContext _bulkyDbContext;
         protected DbSet<T> _dbSet;
+        protected DbContext Context;
 
         public Repository(BulkyDbContext bulkyDbContext)
         {
-            _bulkyDbContext = bulkyDbContext;
-            _dbSet = _bulkyDbContext.Set<T>();
+            _dbSet = bulkyDbContext.Set<T>();
+            Context = bulkyDbContext;
         }
         public async Task Add(T entity)
         {
             await _dbSet.AddAsync(entity);
         }
 
-        public void Delete(T entity)
+        public EntityState Delete(T entity)
         {
-            _dbSet.Remove(entity);
+            return _dbSet.Remove(entity).State;
         }
 
         public async Task<IEnumerable<T>> GetAll()
@@ -34,9 +36,11 @@ namespace BulkyBook.DataAccess.Repositories
             return await _dbSet.ToListAsync();
          }
 
-        public async Task<T> GetAsync(int id)
+        public async Task<T>? GetAsync(int id)
         {
-            return await _bulkyDbContext.FindAsync<T>(id);
+            
+            return await Context.FindAsync<T>(id);
+            
         }
 
         public async Task<T> GetFirstOrDefault(Expression<Func<T, bool>> filter)
@@ -48,5 +52,6 @@ namespace BulkyBook.DataAccess.Repositories
         {
             _dbSet.RemoveRange(entities);
         }
+
     }
 }

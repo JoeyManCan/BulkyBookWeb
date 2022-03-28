@@ -13,7 +13,8 @@ builder.Services.AddRazorPages().AddRazorRuntimeCompilation();//not needed for .
 builder.Services.AddDbContext<BulkyDbContext>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("DefaultConnection")
 ));
-builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+//builder.Services.AddScoped<ICategoryRepository, CategoryRepository>(); ==> no longer needed
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();
 
@@ -42,3 +43,5 @@ app.MapControllerRoute(
 );
 
 app.Run();
+
+public partial class Program { }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -12,8 +13,8 @@ namespace BulkyBook.DataAccess.Repositories.IRepositories
         Task<IEnumerable<T>> GetAll();
         Task Add(T entity);
         Task<T> GetFirstOrDefault(Expression<Func<T, bool>> filter);
-        Task<T> GetAsync(int id);
-        void Delete(T entity);
+        Task<T>? GetAsync(int id);
+        EntityState Delete(T entity);
         void RemoveRange(IEnumerable<T> entities);
     }
 }
