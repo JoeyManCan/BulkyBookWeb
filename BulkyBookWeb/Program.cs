@@ -10,8 +10,11 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();//not needed for .NET 6.0
 
 //Adding DI
+//TODO: when running migrations, apply this command: 
+//Add-Migration NewMigrationName -Project BulkyBook.DataAccess
 builder.Services.AddDbContext<BulkyDbContext>(options => options.UseSqlServer(
-    builder.Configuration.GetConnectionString("DefaultConnection")
+    builder.Configuration.GetConnectionString("DefaultConnection"),
+    b => b.MigrationsAssembly("BulkyBook.DataAccess")
 ));
 //builder.Services.AddScoped<ICategoryRepository, CategoryRepository>(); ==> no longer needed
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();

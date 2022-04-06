@@ -9,14 +9,16 @@ namespace BulkyBook.DataAccess.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {
-        public ICategoryRepository CategoryRepository { get; private set; }
         private readonly BulkyDbContext _bulkyDbContext;
+        public ICategoryRepository CategoryRepository { get; private set; }
+        public ICoverTypeRepository CoverTypeRepository { get; private set; }
 
 
         public UnitOfWork(BulkyDbContext bulkyDbContext)
         {
             _bulkyDbContext = bulkyDbContext;
             CategoryRepository = new CategoryRepository(bulkyDbContext);
+            CoverTypeRepository = new CoverTypeRepository(bulkyDbContext);
         }
 
         protected BulkyDbContext BulkyDbContext

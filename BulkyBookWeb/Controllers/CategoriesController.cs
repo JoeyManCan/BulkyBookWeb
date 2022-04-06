@@ -16,7 +16,7 @@ namespace BulkyBookWeb.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            IEnumerable<Category> categories = await RetrieveAllCategoriesAsync();
+            var categories = await RetrieveAllCategoriesAsync();
 
             return View(categories);
         }
@@ -41,7 +41,7 @@ namespace BulkyBookWeb.Controllers
             var categories = await RetrieveAllCategoriesAsync();
             if(categories != null)
             {
-                return Ok(RetrieveAllCategoriesAsync());
+                return Ok(categories);
             }
             return NotFound();
         }
