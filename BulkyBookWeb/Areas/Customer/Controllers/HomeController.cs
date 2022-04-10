@@ -4,6 +4,7 @@ using System.Diagnostics;
 
 namespace BulkyBookWeb.Controllers
 {
+    [Area("Customer")]//optional, but good practice
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

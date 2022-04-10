@@ -7,6 +7,7 @@ using BulkyBook.DataAccess.Repositories;
 
 namespace BulkyBookWeb.Controllers
 {
+    [Area("Admin")]//optional, but good practice
     public class CategoriesController : Controller
     {
         private IUnitOfWork _unitOfWork;
