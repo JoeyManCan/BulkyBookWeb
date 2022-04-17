@@ -1,11 +1,13 @@
-﻿@model Category
+﻿
+@model CoverType
+
 @{
     ViewData["Title"] = "Create";
 }
-<form method="post" asp-controller="Categories" asp-action="Create">
+<form method="post" asp-controller="CoverTypes" asp-action="Create">
     <div class="border p-3 mt-4">
         <div class="row pb-2">
-            <h2 class="text-primary">Create Category</h2>
+            <h2 class="text-primary">Create Cover Type</h2>
         </div>
         @*<div asp-validation-summary="All"></div>*@
 
@@ -14,16 +16,11 @@
             <input asp-for="Name" class="form-control" />
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
-        <div class="mb-3">
-            <label asp-for="DisplayOrder"></label>
-            <input asp-for="DisplayOrder" class="form-control" />
-            <span class="text-danger" asp-validation-for="DisplayOrder"></span>
-        </div>
         <div style="text-align:center">
             <button type="submit" class="btn btn-secondary">
                 <i class="bi bi-plus-circle"></i> Create
             </button>
-            <a asp-controller="Categories" asp-action="Index" class="btn btn-secondary">
+            <a asp-controller="CoverTypes" asp-action="Index" class="btn btn-secondary">
                 <i class="bi bi-skip-backward-circle-fill"></i> Back To List
             </a>
         </div>
@@ -36,4 +33,3 @@
         <partial name="_ValidationScriptsPartial" />
     @*}*@
 }
-

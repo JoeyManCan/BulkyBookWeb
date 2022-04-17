@@ -1,6 +1,6 @@
 ﻿@model Category
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Category";
 }
 
 <form method="post" asp-controller="Categories" asp-action="Edit">
@@ -10,6 +10,7 @@
         <h2 class="text-primary">Edit Category</h2>
     </div>
     <div class="mb-3">
+        <label asp-for="Name"></label>
         <input asp-for="Name" />
         <span asp-validation-for="Name" class="text-danger"></span>
     </div>

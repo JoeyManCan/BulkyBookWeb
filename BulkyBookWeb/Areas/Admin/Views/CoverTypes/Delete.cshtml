@@ -1,0 +1,20 @@
+﻿@model CoverType
+@{
+    ViewData["TItle"] = "Delete Cover Type";
+}
+<form asp-controller="CoverTypes" asp-action="Delete">
+    <div class="mb-3">
+        <label asp-for="Id"></label>
+        <input asp-for="Id" contenteditable="false" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" contenteditable="false" />
+    </div>
+    <button class="btn btn-primary" type="submit" asp-route-covertypes="@Model">
+        <i class="bi bi-trash3"></i> Delete
+    </button>
+    <a asp-controller="CoverTypes" asp-action="Index" class="btn btn-primary">
+        <i class="bi bi-skip-backward-circle-fill"></i> Back To List
+    </a>
+</form>

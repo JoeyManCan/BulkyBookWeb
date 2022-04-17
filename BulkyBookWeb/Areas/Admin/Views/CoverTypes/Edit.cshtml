@@ -1,0 +1,29 @@
+﻿@model CoverType
+@{
+    ViewData["Title"] = "Edit Cover Type";
+}
+
+<form method="post" asp-controller="CoverTypes" asp-action="Edit">
+    <div class="row pb-2">
+        <h2 class="text-primary">Edit Cover Type</h2>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Name"></label>
+        <input asp-for="Name"/>
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <button class="btn btn=primary" type="submit">
+        <i class="bi bi-pencil"></i> Edit
+    </button>
+
+    <a asp-controller="CoverTypes" asp-action="Index" class="btn btn-primary">
+        <i class="bi bi-skip-backward-circle-fill"></i> Back To List
+    </a>
+</form>
+
+@*Adding client side validation*@
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

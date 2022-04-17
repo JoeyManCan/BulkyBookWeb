@@ -73,7 +73,7 @@ namespace BulkyBookWeb.Controllers
 
                     TempData["success"] = $"Category {category.Name} created successfully";
 
-                    return RedirectToAction("Index");
+                    return RedirectToAction(nameof(Index));
                 }
 
                 return View(category);
@@ -139,7 +139,7 @@ namespace BulkyBookWeb.Controllers
                 await _unitOfWork.Save();
                 TempData["success"] = $"Category {dbCategory.Name} updated successfully";
 
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
 
             }
             catch (Exception)
@@ -192,14 +192,15 @@ namespace BulkyBookWeb.Controllers
                     return NotFound();
                 }
                 var dbCategory = await _unitOfWork.CategoryRepository.GetAsync(id);
-                if(dbCategory != null)
+                if(dbCategory == null)
                 {
-                    _unitOfWork.CategoryRepository.Delete(dbCategory);
-                    await _unitOfWork.Save();
+                    return NotFound();
                 }
+                _unitOfWork.CategoryRepository.Delete(dbCategory);
+                await _unitOfWork.Save();
                 TempData["success"] = $"Category {category.Name} deleted successfully";
 
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             }
             catch (Exception)
             {

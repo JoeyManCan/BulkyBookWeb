@@ -13,7 +13,7 @@ namespace BulkyBook.DataAccess.Repositories.IRepositories
         Task<IEnumerable<T>> GetAll();
         Task Add(T entity);
         Task<T> GetFirstOrDefault(Expression<Func<T, bool>> filter);
-        Task<T>? GetAsync(int id);
+        Task<T> GetAsync(int id);
         EntityState Delete(T entity);
         void RemoveRange(IEnumerable<T> entities);
     }

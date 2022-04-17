@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Add services to the container
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();//not needed for .NET 6.0
 
@@ -18,6 +18,7 @@ builder.Services.AddDbContext<BulkyDbContext>(options => options.UseSqlServer(
 ));
 //builder.Services.AddScoped<ICategoryRepository, CategoryRepository>(); ==> no longer needed
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+//builder.Services.AddScoped<DbContext, BulkyDbContext>();
 
 var app = builder.Build();
 
