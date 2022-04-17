@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BulkyBookWeb.Areas.Admin.Controllers
 {
+    [Area("Admin")]//optional, at first, then mandatory on all other controllers
     public class CoverTypesController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -87,7 +88,7 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
                     await _unitOfWork.CoverTypeRepository.Add(coverType);
                     await _unitOfWork.Save();
 
-                    TempData["Success"] = $"Cover Type{coverType.Name} created successfully";
+                    TempData["success"] = $"Cover Type {coverType.Name} created successfully";
 
                     return RedirectToAction(nameof(Index));
                 }
@@ -151,7 +152,7 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
                 _unitOfWork.CoverTypeRepository.Update(dbCoverType);
                 await _unitOfWork.Save();
 
-                TempData["Success"] = $"Cover Type has been successfully changed to {coverType.Name}";
+                TempData["success"] = $"Cover Type has been successfully changed to {coverType.Name}";
 
                 return RedirectToAction(nameof(Index));
             }
