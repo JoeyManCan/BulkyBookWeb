@@ -1910,21 +1910,17 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Marcos\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\Marcos\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Marcos\\Source\\Projects\\BulkyBookWeb\\BulkyBook.DataAccess\\BulkyBook.DataAccess.csproj",
+      "projectUniqueName": "C:\\Users\\Marcos\\source\\repos\\BulkyBookWeb\\BulkyBook.DataAccess\\BulkyBook.DataAccess.csproj",
       "projectName": "BulkyBook.DataAccess",
-      "projectPath": "C:\\Users\\Marcos\\Source\\Projects\\BulkyBookWeb\\BulkyBook.DataAccess\\BulkyBook.DataAccess.csproj",
+      "projectPath": "C:\\Users\\Marcos\\source\\repos\\BulkyBookWeb\\BulkyBook.DataAccess\\BulkyBook.DataAccess.csproj",
       "packagesPath": "C:\\Users\\Marcos\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Marcos\\Source\\Projects\\BulkyBookWeb\\BulkyBook.DataAccess\\obj\\",
+      "outputPath": "C:\\Users\\Marcos\\source\\repos\\BulkyBookWeb\\BulkyBook.DataAccess\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
         "C:\\Users\\Marcos\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
@@ -1940,8 +1936,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\Marcos\\Source\\Projects\\BulkyBookWeb\\BulkyBook.Models\\BulkyBook.Models.csproj": {
-              "projectPath": "C:\\Users\\Marcos\\Source\\Projects\\BulkyBookWeb\\BulkyBook.Models\\BulkyBook.Models.csproj"
+            "C:\\Users\\Marcos\\source\\repos\\BulkyBookWeb\\BulkyBook.Models\\BulkyBook.Models.csproj": {
+              "projectPath": "C:\\Users\\Marcos\\source\\repos\\BulkyBookWeb\\BulkyBook.Models\\BulkyBook.Models.csproj"
             }
           }
         }

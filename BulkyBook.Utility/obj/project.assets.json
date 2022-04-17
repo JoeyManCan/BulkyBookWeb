@@ -8,21 +8,17 @@
     "net6.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Marcos\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\Marcos\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Marcos\\Source\\Projects\\BulkyBookWeb\\BulkyBook.Utility\\BulkyBook.Utility.csproj",
+      "projectUniqueName": "C:\\Users\\Marcos\\source\\repos\\BulkyBookWeb\\BulkyBook.Utility\\BulkyBook.Utility.csproj",
       "projectName": "BulkyBook.Utility",
-      "projectPath": "C:\\Users\\Marcos\\Source\\Projects\\BulkyBookWeb\\BulkyBook.Utility\\BulkyBook.Utility.csproj",
+      "projectPath": "C:\\Users\\Marcos\\source\\repos\\BulkyBookWeb\\BulkyBook.Utility\\BulkyBook.Utility.csproj",
       "packagesPath": "C:\\Users\\Marcos\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Marcos\\Source\\Projects\\BulkyBookWeb\\BulkyBook.Utility\\obj\\",
+      "outputPath": "C:\\Users\\Marcos\\source\\repos\\BulkyBookWeb\\BulkyBook.Utility\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
         "C:\\Users\\Marcos\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"

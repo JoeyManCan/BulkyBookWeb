@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "TFtdrx/s148aOiK5+zLXpe/ArmX+7sSCCDWroh5q98g1L2FyWaZIOU88U+OYKAAVvMoa8ozuv9shpkmv4+aufw==",
+  "dgSpecHash": "vdDUmuFKo1RyKc9ZdVzW3plmaPh5ynzv6CcXVn21fpThf9gQlIfzSS3ev5dogNiPquP2UOgDC6JG9LElllPy7A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Marcos\\Source\\Projects\\BulkyBookWeb\\BulkyBook.Tests\\BulkyBook.Tests.csproj",
+  "projectFilePath": "C:\\Users\\Marcos\\source\\repos\\BulkyBookWeb\\BulkyBook.Tests\\BulkyBook.Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Marcos\\.nuget\\packages\\coverlet.collector\\3.1.0\\coverlet.collector.3.1.0.nupkg.sha512",
     "C:\\Users\\Marcos\\.nuget\\packages\\humanizer.core\\2.2.0\\humanizer.core.2.2.0.nupkg.sha512",

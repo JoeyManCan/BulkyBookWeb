@@ -9598,21 +9598,17 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Marcos\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\Marcos\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Marcos\\Source\\Projects\\BulkyBookWeb\\BulkyBook.Tests\\BulkyBook.Tests.csproj",
+      "projectUniqueName": "C:\\Users\\Marcos\\source\\repos\\BulkyBookWeb\\BulkyBook.Tests\\BulkyBook.Tests.csproj",
       "projectName": "BulkyBook.Tests",
-      "projectPath": "C:\\Users\\Marcos\\Source\\Projects\\BulkyBookWeb\\BulkyBook.Tests\\BulkyBook.Tests.csproj",
+      "projectPath": "C:\\Users\\Marcos\\source\\repos\\BulkyBookWeb\\BulkyBook.Tests\\BulkyBook.Tests.csproj",
       "packagesPath": "C:\\Users\\Marcos\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Marcos\\Source\\Projects\\BulkyBookWeb\\BulkyBook.Tests\\obj\\",
+      "outputPath": "C:\\Users\\Marcos\\source\\repos\\BulkyBookWeb\\BulkyBook.Tests\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
         "C:\\Users\\Marcos\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
@@ -9628,11 +9624,11 @@
         "net6.0": {
           "targetAlias": "net60",
           "projectReferences": {
-            "C:\\Users\\Marcos\\Source\\Projects\\BulkyBookWeb\\BulkyBook.DataAccess\\BulkyBook.DataAccess.csproj": {
-              "projectPath": "C:\\Users\\Marcos\\Source\\Projects\\BulkyBookWeb\\BulkyBook.DataAccess\\BulkyBook.DataAccess.csproj"
+            "C:\\Users\\Marcos\\source\\repos\\BulkyBookWeb\\BulkyBook.DataAccess\\BulkyBook.DataAccess.csproj": {
+              "projectPath": "C:\\Users\\Marcos\\source\\repos\\BulkyBookWeb\\BulkyBook.DataAccess\\BulkyBook.DataAccess.csproj"
             },
-            "C:\\Users\\Marcos\\Source\\Projects\\BulkyBookWeb\\BulkyBookWeb\\BulkyBookWeb.csproj": {
-              "projectPath": "C:\\Users\\Marcos\\Source\\Projects\\BulkyBookWeb\\BulkyBookWeb\\BulkyBookWeb.csproj"
+            "C:\\Users\\Marcos\\source\\repos\\BulkyBookWeb\\BulkyBookWeb\\BulkyBookWeb.csproj": {
+              "projectPath": "C:\\Users\\Marcos\\source\\repos\\BulkyBookWeb\\BulkyBookWeb\\BulkyBookWeb.csproj"
             }
           }
         }
