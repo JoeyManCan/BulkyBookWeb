@@ -163,6 +163,7 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
         }
 
         // GET: CoverTypeController/Delete/5
+        [HttpGet]
         public ActionResult Delete(int id)
         {
             if(id == 0)
