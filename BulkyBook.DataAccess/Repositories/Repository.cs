@@ -11,10 +11,10 @@ using System.Threading.Tasks;
 
 namespace BulkyBook.DataAccess.Repositories
 {
-    public class Repository<T> : IRepository<T> where T : class
+    public abstract class Repository<T> : IRepository<T> where T : class
     {
         protected DbSet<T> _dbSet;
-        protected DbContext Context;
+        protected BulkyDbContext Context;
 
         public Repository(BulkyDbContext bulkyDbContext)
         {

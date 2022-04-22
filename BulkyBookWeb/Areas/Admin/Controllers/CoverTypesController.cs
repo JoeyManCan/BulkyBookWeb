@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BulkyBookWeb.Areas.Admin.Controllers
 {
-    [Area("Admin")]//optional, at first, then mandatory on all other controllers
+    [Area("Admin")]//optional, at first, then mandatory on all other controllers once applied
     public class CoverTypesController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

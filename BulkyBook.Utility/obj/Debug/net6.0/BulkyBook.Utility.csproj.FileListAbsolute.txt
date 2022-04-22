@@ -10,3 +10,15 @@ C:\Users\Marcos\Source\Projects\BulkyBookWeb\BulkyBook.Utility\obj\Debug\net6.0\
 C:\Users\Marcos\Source\Projects\BulkyBookWeb\BulkyBook.Utility\obj\Debug\net6.0\refint\BulkyBook.Utility.dll
 C:\Users\Marcos\Source\Projects\BulkyBookWeb\BulkyBook.Utility\obj\Debug\net6.0\BulkyBook.Utility.pdb
 C:\Users\Marcos\Source\Projects\BulkyBookWeb\BulkyBook.Utility\obj\Debug\net6.0\ref\BulkyBook.Utility.dll
+C:\Users\Marcos\source\repos\BulkyBookWeb\BulkyBook.Utility\bin\Debug\net6.0\BulkyBook.Utility.deps.json
+C:\Users\Marcos\source\repos\BulkyBookWeb\BulkyBook.Utility\bin\Debug\net6.0\BulkyBook.Utility.dll
+C:\Users\Marcos\source\repos\BulkyBookWeb\BulkyBook.Utility\bin\Debug\net6.0\BulkyBook.Utility.pdb
+C:\Users\Marcos\source\repos\BulkyBookWeb\BulkyBook.Utility\obj\Debug\net6.0\BulkyBook.Utility.csproj.AssemblyReference.cache
+C:\Users\Marcos\source\repos\BulkyBookWeb\BulkyBook.Utility\obj\Debug\net6.0\BulkyBook.Utility.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Marcos\source\repos\BulkyBookWeb\BulkyBook.Utility\obj\Debug\net6.0\BulkyBook.Utility.AssemblyInfoInputs.cache
+C:\Users\Marcos\source\repos\BulkyBookWeb\BulkyBook.Utility\obj\Debug\net6.0\BulkyBook.Utility.AssemblyInfo.cs
+C:\Users\Marcos\source\repos\BulkyBookWeb\BulkyBook.Utility\obj\Debug\net6.0\BulkyBook.Utility.csproj.CoreCompileInputs.cache
+C:\Users\Marcos\source\repos\BulkyBookWeb\BulkyBook.Utility\obj\Debug\net6.0\BulkyBook.Utility.dll
+C:\Users\Marcos\source\repos\BulkyBookWeb\BulkyBook.Utility\obj\Debug\net6.0\refint\BulkyBook.Utility.dll
+C:\Users\Marcos\source\repos\BulkyBookWeb\BulkyBook.Utility\obj\Debug\net6.0\BulkyBook.Utility.pdb
+C:\Users\Marcos\source\repos\BulkyBookWeb\BulkyBook.Utility\obj\Debug\net6.0\ref\BulkyBook.Utility.dll

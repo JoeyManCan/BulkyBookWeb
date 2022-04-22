@@ -10,6 +10,7 @@ namespace BulkyBook.DataAccess.Repositories.IRepositories
     {
         ICategoryRepository CategoryRepository { get; }
         ICoverTypeRepository CoverTypeRepository { get; }
+        IProductRepository ProductRepository { get; }
 
         Task<int> Save();
     }

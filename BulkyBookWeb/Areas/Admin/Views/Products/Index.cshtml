@@ -1,0 +1,30 @@
+﻿<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-12">
+            <h2 class="text-primary">Products</h2>
+        </div>
+    </div>
+</div>
+
+@if (Model.Count > 0)
+{
+    <table class="table table-bordered table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th> Title </th>
+                <th> ISBN </th>
+                <th> Price </th>
+                <th> Author </th>
+                <th> Category </th>
+            </tr>
+        </thead>
+        
+    </table>
+}
+
+
+<div class="col-12" style="text-align:center">
+    <a asp-controller="Products" asp-action="Upsert" class="btn-primary btn">
+        <i class="bi bi-plus-circle"></i> Create a new Cover Type
+    </a>
+</div>
