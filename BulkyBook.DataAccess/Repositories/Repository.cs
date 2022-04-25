@@ -1,5 +1,4 @@
 ﻿using BulkyBook.DataAccess.Repositories.IRepositories;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Infrastructure;
@@ -37,7 +36,13 @@ namespace BulkyBook.DataAccess.Repositories
             return await _dbSet.ToListAsync();
         }
 
-        
+        protected IEnumerable<TResult> ReturnSelectListItems<TSource, TResult>
+            (Func<T, TResult> lambdaFunction) 
+        {
+            var result = GetAll().Result.Select(lambdaFunction);
+
+            return result;
+        }
 
 
         public async Task<T> GetAsync(int id)

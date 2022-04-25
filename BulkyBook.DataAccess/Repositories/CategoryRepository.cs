@@ -24,7 +24,8 @@ namespace BulkyBook.DataAccess.Repositories
 
         public IEnumerable<SelectListItem> ReturnSelectListItems()
         {
-            var result = GetAll().Result.Select(cat => new SelectListItem()
+            var result = ReturnSelectListItems<Category, SelectListItem>(
+                cat => new SelectListItem()
             {
                 Text = cat.Name,
                 Value = cat.Id.ToString()
