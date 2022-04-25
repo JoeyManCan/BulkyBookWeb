@@ -1,5 +1,6 @@
 ﻿using BulkyBook.DataAccess.Repositories.IRepositories;
 using BulkyBook.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,17 @@ namespace BulkyBook.DataAccess.Repositories
         public EntityState Update(Category category)
         {
             return Context.Update(category).State;
+        }
+
+        public IEnumerable<SelectListItem> ReturnSelectListItems()
+        {
+            var result = GetAll().Result.Select(cat => new SelectListItem()
+            {
+                Text = cat.Name,
+                Value = cat.Id.ToString()
+            });
+
+            return result;
         }
     }
 }

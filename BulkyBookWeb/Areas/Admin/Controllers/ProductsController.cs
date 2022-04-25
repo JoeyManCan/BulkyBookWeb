@@ -218,7 +218,12 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
             ProductViewModel productViewModel = new()
             {
                 Product = new(),
-                CategoryList = _unitOfWork.CategoryRepository.
+                CategoryList = _unitOfWork.CategoryRepository
+                    .ReturnSelectListItems(),
+                CoverTypeList = _unitOfWork.CoverTypeRepository
+                    .ReturnSelectListItems()
+
+                /*CategoryList = _unitOfWork.CategoryRepository.
                     GetAll().Result.Select(cat => new SelectListItem
                     {
                         Text = cat.Name,
@@ -229,7 +234,7 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
                     {
                         Text = coverType.Name,
                         Value = coverType.Id.ToString()
-                    })
+                    })*/
             };
             
 

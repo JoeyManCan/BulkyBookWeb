@@ -1,4 +1,5 @@
 ﻿using BulkyBook.DataAccess.Repositories.IRepositories;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Infrastructure;
@@ -34,13 +35,16 @@ namespace BulkyBook.DataAccess.Repositories
         public async Task<IEnumerable<T>> GetAll()
         {
             return await _dbSet.ToListAsync();
-         }
+        }
+
+        
+
 
         public async Task<T> GetAsync(int id)
         {
-            
+
             return await Context.FindAsync<T>(id);
-            
+
         }
 
         public async Task<T> GetFirstOrDefault(Expression<Func<T, bool>> filter)
