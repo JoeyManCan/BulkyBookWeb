@@ -1,5 +1,6 @@
 ﻿using BulkyBook.DataAccess.Repositories.IRepositories;
 using BulkyBook.Models;
+using BulkyBook.Models.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -104,7 +105,7 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
 
         // GET: CoverTypeController/Edit/5
         [HttpGet]
-        public ActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
             if(id == 0)
             {
@@ -112,7 +113,7 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
             }
             try
             {
-                var dbProduct = _unitOfWork.ProductRepository.GetFirstOrDefault(
+                var dbProduct = await _unitOfWork.ProductRepository.GetFirstOrDefault(
                     prod => prod.Id == id);
 
                 if(dbProduct == null)
@@ -162,14 +163,14 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
 
         // GET: CoverTypeController/Delete/5
         [HttpGet]
-        public ActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             if(id == 0)
             {
                 return NotFound();
             }
 
-            var product = _unitOfWork.ProductRepository.GetFirstOrDefault(
+            var product = await _unitOfWork.ProductRepository.GetFirstOrDefault(
                 prod => prod.Id == id);
 
             if (product == null)
@@ -211,52 +212,45 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public IActionResult Upsert()//int id)
+        public async Task<IActionResult> Upsert(int id)
         {
-            /*if (id == 0)
+
+            ProductViewModel productViewModel = new()
             {
-                return NotFound();
+                Product = new(),
+                CategoryList = _unitOfWork.CategoryRepository.
+                    GetAll().Result.Select(cat => new SelectListItem
+                    {
+                        Text = cat.Name,
+                        Value = cat.Id.ToString()
+                    }),
+                CoverTypeList = _unitOfWork.CoverTypeRepository
+                    .GetAll().Result.Select(coverType => new SelectListItem
+                    {
+                        Text = coverType.Name,
+                        Value = coverType.Id.ToString()
+                    })
+            };
+            
+
+            if (id == 0)
+            {
+                //ViewBag.CategoryList = categoryList;
+                //ViewData["coverTypeList"] = coverTypeList;
+                return View(productViewModel);
             }
 
-            var dbProduct = _unitOfWork.ProductRepository.GetFirstOrDefault(
+            /*var dbProduct = await _unitOfWork.ProductRepository.GetFirstOrDefault(
                 prod => prod.Id == id);
 
             if(dbProduct == null)
             {
                 return NotFound();
-            }
+            }*/
 
-            return View(dbProduct);*/
+            return View(productViewModel);
 
-            //Filling up dropdown list (IEnumerable)
-            IEnumerable<SelectListItem> categoryList = _unitOfWork.CategoryRepository.GetAll()
-                .Result.Select(
-                    cat => new SelectListItem
-                    {
-                        Text = cat.Name,
-                        Value = cat.Id.ToString()
-                    }
-                );
-
-            var coverTypeList = _unitOfWork.CoverTypeRepository.GetAll()
-                .Result.Select(
-                    ct => new SelectListItem
-                    {
-                        Text = ct.Name,
-                        Value = ct.Id.ToString()
-                    }
-                );
-
-            var productList = _unitOfWork.ProductRepository.GetAll()
-                .Result.Select(
-                    prod => new SelectListItem
-                    {
-                        Text = prod.Title,
-                        Value = prod.Id.ToString()
-                    }
-                );
-
-            return View();
+            //return View();
         }
 
         [HttpPost]

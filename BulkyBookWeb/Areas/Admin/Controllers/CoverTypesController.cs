@@ -103,7 +103,7 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
 
         // GET: CoverTypeController/Edit/5
         [HttpGet]
-        public ActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
             if(id == 0)
             {
@@ -111,7 +111,7 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
             }
             try
             {
-                var coverType = _unitOfWork.CoverTypeRepository.GetFirstOrDefault(
+                var coverType = await _unitOfWork.CoverTypeRepository.GetFirstOrDefault(
                     ct => ct.Id == id);
 
                 if(coverType == null)
@@ -164,14 +164,14 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
 
         // GET: CoverTypeController/Delete/5
         [HttpGet]
-        public ActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             if(id == 0)
             {
                 return NotFound();
             }
 
-            var coverType = _unitOfWork.CoverTypeRepository.GetFirstOrDefault(
+            var coverType = await _unitOfWork.CoverTypeRepository.GetFirstOrDefault(
                 ct => ct.Id == id);
 
             if (coverType == null)
