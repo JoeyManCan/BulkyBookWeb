@@ -3,7 +3,7 @@
     ViewData["Title"] = "Edit Product";
 }
 
-<form method="post" asp-controller="Products" asp-action="Upsert">
+<form method="post" asp-controller="Products" asp-action="Upsert" enctype="multipart/form-data">
     <div class="row pb-2">
         <h2 class="text-primary">Edit Products</h2>
     </div>
@@ -47,6 +47,11 @@
         <label asp-for="Product.Price100"></label>
         <input asp-for="Product.Price100" class="form-control"/>
         <span asp-validation-for="Product.Price100" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Product.ImageUrl"></label>
+        <input type="file" class="form-control"/>
+        <span asp-validation-for="Product.ImageUrl" class="text-danger"></span>
     </div>
     <div class="mb-3">
         <label asp-for="Product.CategoryId"></label>
