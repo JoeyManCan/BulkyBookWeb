@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+﻿using BulkyBook.Utility;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -37,7 +38,10 @@ namespace BulkyBook.Models
         [Display(Name = "Price for 100+")]
         [Range(1, 10000)]
         public double Price100 { get; set; }
-        [ValidateNever]
+        [Required]
+        [DataType(DataType.Upload)]
+        [MaxFileSize(5 * 1024 * 1024)]
+        [AllowedFileExtensions(new string[] {".jpg",".png"})]
         public string ImageUrl { get; set; }
 
         //the properties below create a foreign key relationship
