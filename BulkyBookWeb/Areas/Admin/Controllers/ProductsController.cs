@@ -31,7 +31,7 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
             try
             {
                 var products = await ReturnAll();
-                if(products == null)
+                if (products == null)
                 {
                     return NotFound();
                 }
@@ -41,7 +41,7 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
             {
 
                 throw;
-            } 
+            }
         }
         // GET: CoverTypeController
         public async Task<IActionResult> GetAll()
@@ -49,7 +49,7 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
             try
             {
                 var products = await ReturnAll();
-                if(products == null)
+                if (products == null)
                 {
                     return NotFound();
                 }
@@ -85,17 +85,14 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
         {
             try
             {
-                if (ModelState.IsValid)
-                {
-                    await _unitOfWork.ProductRepository.Add(product);
-                    await _unitOfWork.Save();
 
-                    TempData["success"] = $"Product {product.Title} created successfully";
+                await _unitOfWork.ProductRepository.Add(product);
+                await _unitOfWork.Save();
 
-                    return RedirectToAction(nameof(Index));
-                }
+                TempData["success"] = $"Product {product.Title} created successfully";
 
-                return View(product);
+                return RedirectToAction(nameof(Index));
+
             }
             catch
             {
@@ -107,7 +104,7 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            if(id == 0)
+            if (id == 0)
             {
                 return NotFound();
             }
@@ -116,13 +113,13 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
                 var dbProduct = await _unitOfWork.ProductRepository.GetFirstOrDefault(
                     prod => prod.Id == id);
 
-                if(dbProduct == null)
+                if (dbProduct == null)
                 {
                     return NotFound(dbProduct);
                 }
 
                 return View(dbProduct);
-                    
+
             }
             catch (Exception ex)
             {
@@ -136,19 +133,19 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Product productParam)
         {
-            if(id == 0)
+            if (id == 0)
             {
                 return NotFound();
             }
             try
             {
-                if(productParam == null)
+                if (productParam == null)
                 {
                     return NotFound();
                 }
 
                 await _unitOfWork.ProductRepository.Update(productParam);
-                
+
                 await _unitOfWork.Save();
 
                 TempData["success"] = $"Product has been successfully changed";
@@ -165,7 +162,7 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            if(id == 0)
+            if (id == 0)
             {
                 return NotFound();
             }
@@ -186,7 +183,7 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id, Product product)
         {
-            if(id == 0)
+            if (id == 0)
             {
                 return NotFound();
             }
@@ -194,7 +191,7 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
             {
                 var dbProduct = await _unitOfWork.ProductRepository.GetAsync(id);
 
-                if(dbProduct == null)
+                if (dbProduct == null)
                 {
                     return NotFound();
                 }
@@ -236,7 +233,7 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
                         Value = coverType.Id.ToString()
                     })*/
             };
-            
+
 
             if (id == 0)
             {
@@ -259,27 +256,33 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Upsert(int id = 0, Product productParam = null!)
+        public async Task<IActionResult> Upsert(ProductViewModel productViewModel, IFormFile formFile)
         {
             try
             {
-                var dbProduct = await _unitOfWork.ProductRepository.GetAsync(id);
-                //Id does not exist, Create Product
-                if(dbProduct == null)
+                if (ModelState.IsValid)
                 {
-                    await Create(productParam);
-                }
-                else//If existing, update product
-                {
-                    await Edit(dbProduct.Id, dbProduct);
-                }
+                    var dbProduct = await _unitOfWork
+                    .ProductRepository.GetAsync(productViewModel.Product.Id);
+                    //Id does not exist, Create Product
+                    if (dbProduct == null)
+                    {
+                        await Create(productViewModel.Product);
+                    }
+                    else//If existing, update product
+                    {
+                        await Edit(dbProduct.Id, dbProduct);
+                    }
 
-                return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(productViewModel);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                return BadRequest(ex);
             }
+
         }
     }
 }
