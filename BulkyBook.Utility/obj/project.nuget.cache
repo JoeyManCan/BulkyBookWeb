@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "Vd2T7CfyGIdGvUPwMO/2tKCdpMI5dMpyqBj5AQ8kSdpNm/UVOfKf0qf4R4Ewzurj697rjcLDabDgTSzMIx5VRA==",
+  "dgSpecHash": "kR6IvEkt5pz587cBBclQRK0ZD8j9zsgBgxpBSDB/DzAmq334HM4W0jFYxiPCMTvmB0uFZRY+FoQJcnLwt685dQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Marcos\\source\\repos\\BulkyBookWeb\\BulkyBook.Utility\\BulkyBook.Utility.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Marcos\\.nuget\\packages\\microsoft.aspnetcore.http.features\\5.0.16\\microsoft.aspnetcore.http.features.5.0.16.nupkg.sha512",
+    "C:\\Users\\Marcos\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.1\\microsoft.extensions.primitives.5.0.1.nupkg.sha512",
+    "C:\\Users\\Marcos\\.nuget\\packages\\system.io.pipelines\\5.0.2\\system.io.pipelines.5.0.2.nupkg.sha512"
+  ],
   "logs": []
 }
