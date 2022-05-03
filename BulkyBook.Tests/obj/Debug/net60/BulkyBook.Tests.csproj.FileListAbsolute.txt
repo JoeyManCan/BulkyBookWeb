@@ -1305,3 +1305,5 @@ C:\Users\Marcos\source\repos\BulkyBookWeb\BulkyBook.Tests\obj\Debug\net60\refint
 C:\Users\Marcos\source\repos\BulkyBookWeb\BulkyBook.Tests\obj\Debug\net60\BulkyBook.Tests.pdb
 C:\Users\Marcos\source\repos\BulkyBookWeb\BulkyBook.Tests\obj\Debug\net60\BulkyBook.Tests.genruntimeconfig.cache
 C:\Users\Marcos\source\repos\BulkyBookWeb\BulkyBook.Tests\obj\Debug\net60\ref\BulkyBook.Tests.dll
+C:\Users\Marcos\source\repos\BulkyBookWeb\BulkyBook.Tests\bin\Debug\net60\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\Marcos\source\repos\BulkyBookWeb\BulkyBook.Tests\bin\Debug\net60\Newtonsoft.Json.Bson.dll

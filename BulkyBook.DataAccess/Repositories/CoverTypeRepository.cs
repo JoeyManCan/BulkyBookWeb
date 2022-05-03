@@ -1,5 +1,6 @@
 ﻿using BulkyBook.DataAccess.Repositories.IRepositories;
 using BulkyBook.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -20,5 +21,18 @@ namespace BulkyBook.DataAccess.Repositories
         {
             return Context.Update(coverType).State;
         }
+
+        public IEnumerable<SelectListItem> ReturnSelectListItems()
+        {
+            var result = ReturnSelectListItems<CoverType, SelectListItem>(
+                coverType => new SelectListItem()
+            {
+                Text = coverType.Name,
+                Value = coverType.Id.ToString()
+            });
+
+            return result;
+        }
+
     }
 }
