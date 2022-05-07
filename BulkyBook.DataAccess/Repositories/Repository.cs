@@ -20,6 +20,7 @@ namespace BulkyBook.DataAccess.Repositories
         {
             _dbSet = bulkyDbContext.Set<T>();
             Context = bulkyDbContext;
+            //Context.Products.Include(product => product.Category).Include(product => product.CoverType);
         }
         public async Task Add(T entity)
         {
@@ -31,9 +32,33 @@ namespace BulkyBook.DataAccess.Repositories
             return _dbSet.Remove(entity).State;
         }
 
+        private IQueryable<T> SeparateIncludeProperties(string? includeProperties = null)
+        {
+            IQueryable<T> query = _dbSet;
+            if (includeProperties != null)
+            {
+                //Separates each property in the string separated by ","
+                foreach(var property in includeProperties
+                    .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    //the Include method here is used to associated entities (Category, CoverType) to the top entity (Product)
+                    query = query.Include(property);
+                }
+            }
+
+            return query;
+        }
+
+        //includeProperties - "Category, CoverType"
         public async Task<IEnumerable<T>> GetAll()
         {
             return await _dbSet.ToListAsync();
+        }
+        public IEnumerable<T> GetAll(string? includeProperties = null)
+        {
+            var query = SeparateIncludeProperties(includeProperties);
+
+            return query.ToList();
         }
 
         protected IEnumerable<TResult> ReturnSelectListItems<TSource, TResult>
@@ -52,9 +77,10 @@ namespace BulkyBook.DataAccess.Repositories
 
         }
 
-        public async Task<T> GetFirstOrDefault(Expression<Func<T, bool>> filter)
+        public T GetFirstOrDefault(Expression<Func<T, bool>> filter, string? includeProperties = null)
         {
-            return await _dbSet.FirstOrDefaultAsync(filter);
+            var query = SeparateIncludeProperties(includeProperties);
+            return query.FirstOrDefault(filter)!;
         }
 
         public void RemoveRange(IEnumerable<T> entities)

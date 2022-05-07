@@ -87,7 +87,7 @@ namespace BulkyBookWeb.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Edit(int id)
+        public IActionResult Edit(int id)
         {
             if(id == 0)
             {
@@ -98,7 +98,7 @@ namespace BulkyBookWeb.Controllers
             {
                 /*var category = await _categoryRepository.Categories
                     .FirstOrDefaultAsync(category => category.Id == id);*/
-                var category = await _unitOfWork.CategoryRepository.
+                var category = _unitOfWork.CategoryRepository.
                     GetFirstOrDefault(category => category.Id == id); 
                 if(category == null)
                 {
@@ -125,7 +125,7 @@ namespace BulkyBookWeb.Controllers
 
             try
             {
-                var dbCategory = await _unitOfWork.CategoryRepository.
+                var dbCategory = _unitOfWork.CategoryRepository.
                     GetFirstOrDefault(category => category.Id == id);
                 if(dbCategory == null)
                 {
@@ -152,7 +152,7 @@ namespace BulkyBookWeb.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Delete(int id)
+        public IActionResult Delete(int id)
         {
             if (id == 0)
             {
@@ -163,7 +163,7 @@ namespace BulkyBookWeb.Controllers
             {
                 /*var category = await _categoryRepository.Categories
                     .FirstOrDefaultAsync(category => category.Id == id);*/
-                var category = await _unitOfWork.CategoryRepository
+                var category = _unitOfWork.CategoryRepository
                     .GetFirstOrDefault(category => category.Id == id); 
 
                 if (category == null)

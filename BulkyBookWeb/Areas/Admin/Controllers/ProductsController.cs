@@ -11,16 +11,25 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
     public class ProductsController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly ILogger<ProductsController> _logger;
+        private readonly IWebHostEnvironment _hostEnvironment;
+        //private readonly ILogger<ProductsController> _logger;
 
-        public ProductsController(IUnitOfWork unitOfWork)
+        public ProductsController(IUnitOfWork unitOfWork, IWebHostEnvironment hostEnvironment)
         {
             _unitOfWork = unitOfWork;
+            _hostEnvironment = hostEnvironment;
+
         }
 
         private async Task<IEnumerable<Product>> ReturnAll()
         {
             var products = await _unitOfWork.ProductRepository.GetAll();
+
+            return products;
+        }
+        private IEnumerable<Product> ReturnAll(string? includeProperties = null)
+        {
+            var products =  _unitOfWork.ProductRepository.GetAll(includeProperties);
 
             return products;
         }
@@ -33,29 +42,11 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
                 var products = await ReturnAll();
                 if (products == null)
                 {
-                    return NotFound();
+                    return NotFound(products);
                 }
                 return View(products);
             }
             catch (Exception)
-            {
-
-                throw;
-            }
-        }
-        // GET: CoverTypeController
-        public async Task<IActionResult> GetAll()
-        {
-            try
-            {
-                var products = await ReturnAll();
-                if (products == null)
-                {
-                    return NotFound();
-                }
-                return View(products);
-            }
-            catch (Exception ex)
             {
 
                 throw;
@@ -102,7 +93,7 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
 
         // GET: CoverTypeController/Edit/5
         [HttpGet]
-        public async Task<IActionResult> Edit(int id)
+        public IActionResult Edit(int id)
         {
             if (id == 0)
             {
@@ -110,7 +101,7 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
             }
             try
             {
-                var dbProduct = await _unitOfWork.ProductRepository.GetFirstOrDefault(
+                var dbProduct = _unitOfWork.ProductRepository.GetFirstOrDefault(
                     prod => prod.Id == id);
 
                 if (dbProduct == null)
@@ -160,14 +151,14 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
 
         // GET: CoverTypeController/Delete/5
         [HttpGet]
-        public async Task<IActionResult> Delete(int id)
+        public IActionResult Delete(int id)
         {
             if (id == 0)
             {
                 return NotFound();
             }
 
-            var product = await _unitOfWork.ProductRepository.GetFirstOrDefault(
+            var product = _unitOfWork.ProductRepository.GetFirstOrDefault(
                 prod => prod.Id == id);
 
             if (product == null)
@@ -208,10 +199,8 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
             }
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Upsert(int id)
+        private ProductViewModel InstantiatePVM()
         {
-
             ProductViewModel productViewModel = new()
             {
                 Product = new(),
@@ -220,19 +209,16 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
                 CoverTypeList = _unitOfWork.CoverTypeRepository
                     .ReturnSelectListItems()
 
-                /*CategoryList = _unitOfWork.CategoryRepository.
-                    GetAll().Result.Select(cat => new SelectListItem
-                    {
-                        Text = cat.Name,
-                        Value = cat.Id.ToString()
-                    }),
-                CoverTypeList = _unitOfWork.CoverTypeRepository
-                    .GetAll().Result.Select(coverType => new SelectListItem
-                    {
-                        Text = coverType.Name,
-                        Value = coverType.Id.ToString()
-                    })*/
             };
+            return productViewModel;
+
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Upsert(int id)
+        {
+
+            var productViewModel = InstantiatePVM();
 
 
             if (id == 0)
@@ -255,13 +241,42 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
             //return View();
         }
 
+        private string SetFileUploadUrl(IFormFile formFile)
+        {
+            if (formFile != null)
+            {
+                //avoinding more than one file with the same name
+                var fileName = Guid.NewGuid().ToString();
+                var filePath = @"images\products";
+                var folderLocation = Path.Combine(_hostEnvironment.WebRootPath,
+                    filePath);
+                var fileExtension = Path.GetExtension(formFile.FileName);
+                var fullPath = fileName + fileExtension;
+
+                using (var fileStreams = new FileStream(
+                    Path.Combine(folderLocation, fullPath),
+                    FileMode.Create))
+                {
+                    formFile.CopyTo(fileStreams);
+
+                }
+
+                return @$"{filePath}\{fullPath}";
+            }
+
+            return string.Empty;
+        }
+
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Upsert(ProductViewModel productViewModel, IFormFile formFile)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
+                    productViewModel.Product.ImageUrl = SetFileUploadUrl(formFile);
+
                     var dbProduct = await _unitOfWork
                     .ProductRepository.GetAsync(productViewModel.Product.Id);
                     //Id does not exist, Create Product
@@ -276,7 +291,7 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
 
                     return RedirectToAction(nameof(Index));
                 }
-                return View(productViewModel);
+                return View(InstantiatePVM());
             }
             catch (Exception ex)
             {
@@ -284,5 +299,27 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
             }
 
         }
+
+        #region API CALLS 
+
+        // GET: CoverTypeController
+        public IActionResult GetAll()
+        {
+            try
+            {
+                var products = ReturnAll("Category,CoverType");
+                if (products == null)
+                {
+                    return NotFound();
+                }
+                return Json(new {data = products});
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        #endregion
     }
 }

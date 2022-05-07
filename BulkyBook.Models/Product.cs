@@ -38,10 +38,11 @@ namespace BulkyBook.Models
         [Display(Name = "Price for 100+")]
         [Range(1, 10000)]
         public double Price100 { get; set; }
-        [Required]
+        /*[Required]
         [DataType(DataType.Upload)]
         [MaxFileSize(5 * 1024 * 1024)]
-        [AllowedFileExtensions(new string[] {".jpg",".png"})]
+        [AllowedFileExtensions(new string[] {".jpg",".png"})]*/
+        [ValidateNever]
         public string ImageUrl { get; set; }
 
         //the properties below create a foreign key relationship
@@ -51,6 +52,7 @@ namespace BulkyBook.Models
         [Required]
         public int CategoryId { get; set; }
         [ForeignKey("CategoryId")]//not mandatory, but good practice
+        [ValidateNever]
         public Category Category { get; set; }
 
         //the properties below create a foreign key relationship
@@ -60,6 +62,7 @@ namespace BulkyBook.Models
         [Required]
         public int CoverTypeId { get; set; }
         [ForeignKey("CoverTypeId")]//not mandatory, but good practice
+        [ValidateNever]
         public CoverType CoverType { get; set; }
     }
 }
